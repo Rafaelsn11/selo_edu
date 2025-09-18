@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/custom.css" />
+    <title>Selo Edu</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="login-form">
+        <h1>Login</h1>
+        <p>Email</p>
+        <input type="email" />
+        <p>Senha</p>
+        <input type="password" /> <br />
+        <button
+          class="botton-login"
+          onclick="location.href=`{{ url_for('home') }}`"
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
