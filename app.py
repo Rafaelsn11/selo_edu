@@ -3,12 +3,15 @@ from extensions import db, login_manager
 from models.user import User
 from routes.auth import auth_bp
 from routes.user import users_bp
+from extensions import mail
 
 app = Flask(__name__)
 app.config.from_object("config.Config")
 
 db.init_app(app)
 login_manager.init_app(app)
+
+mail.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):

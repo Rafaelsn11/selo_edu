@@ -5,6 +5,8 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 auth_bp.add_url_rule("/login", view_func=auth_views.login, methods=["GET", "POST"])
 auth_bp.add_url_rule("/logout", view_func=auth_views.logout)
+auth_bp.add_url_rule("/forgot", view_func=auth_views.forgot_password_request, methods=["GET","POST"])
+auth_bp.add_url_rule("/reset_password/<token>", view_func=auth_views.reset_password, methods=["GET","POST"])
 
 
 
