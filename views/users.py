@@ -17,8 +17,8 @@ def create():
         role = request.form.get("role", "aluno")
         senha = request.form.get("password")
         
-        if current_user.role != 'coordenador' and role == 'coordenador':
-            flash("Coordenador nao pode criar outro coordenador.", "danger")
+        if current_user.role not in ['master', 'coordenador'] and role == 'coordenador':
+            flash("Você não tem permissão para criar um usuário Coordenador.", "danger")
             
             return render_template("users/form.html", form_data={"nome": nome, "email": email, "role": role})
         
@@ -38,9 +38,9 @@ def create():
 
 
 @login_required
-def show():
-    usuarios = User.query.all()
-    return render_template("users/show.html", usuarios=usuarios)
+def show(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template("users/show.html", user=user)
 
 @login_required
 def edit(user_id):
@@ -52,8 +52,8 @@ def edit(user_id):
         role = request.form.get("role", "aluno")
         senha = request.form.get("senha")
 
-        if current_user.role != 'coordenador' and role == 'coordenador':
-            flash("Coordenador nao pode promover outro usuario a coordenador.", "danger")
+        if current_user.role not in ['master', 'coordenador'] and role == 'coordenador':
+            flash("Você não tem permissão para promover um usuário a Coordenador.", "danger")
             return render_template("users/form.html", user=user)
 
         user.role = role
